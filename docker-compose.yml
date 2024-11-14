@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: my_password  
+      POSTGRES_DB: postgres_db
+    volumes:
+      - bd_pgdata:/var/lib/postgresql/data  # Привязка к тому
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.inline
+    depends_on:
+      - db
+
+volumes:
+  bd_pgdata: {}  
